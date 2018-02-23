@@ -53,23 +53,24 @@ let scrape = async () => {
 
         swellArr.splice(0,1);
 
-       
         //SWELL DIRECTION
         for( var swellDirection of swellDirections){
             let direction = swellDirection.getAttribute('data-original-title');
             swellDirArr.push({direction});
         }
         
+
+        //////////////////////////////////////////////////////////
         var chart = hoursArr.map((b,i)=> chart = {...b, ...swellArr[i], ...swellDirArr[i] }
         )
         
         extractTable = (start,n)=> {
             return chart.slice(start,n)
         }
-
+        //////////////////////////////////////////////////////////
         
 
-        //ORDENAR ESTA PEDAZO DE MIERDA
+        //MAKE THIS CLEAR////////////////////////////////////////
         
         var msw=[];
 
@@ -77,8 +78,10 @@ let scrape = async () => {
         msw = data.map((day,i)=>{
             dayForecast = extractTable(counter,counter+8)
             counter+=8;
-            return {day, dayForecast}
+            return  {day, dayForecast}
         })
+        /////////////////////////////////////////////////////
+
 
 
         return msw;
@@ -90,5 +93,5 @@ let scrape = async () => {
 
 //SCRAPE FORECAST
 scrape().then((value) => {
-    console.log(value); 
+    console.log(value[0]); 
 });
