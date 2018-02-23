@@ -4,9 +4,6 @@ const rootPage = "https://es.magicseaweed.com/Zurriola-Surf-Report/171/";
 
 // (TODO) Make an array of webpages of different spots 
 
-   
-
-
 
 let scrape = async () => {
     
@@ -15,7 +12,6 @@ let scrape = async () => {
     const page = await browser.newPage();
     await page.goto(rootPage);
 
-  
     
     //SELECT ITEMS
     const result = await page.evaluate(() => {
@@ -39,7 +35,7 @@ let scrape = async () => {
            var dia = day.textContent;
             console.log(day)
             
-            data.push({dia}); 
+            data.push(dia); 
         }
 
         //HOURS
@@ -67,11 +63,25 @@ let scrape = async () => {
         var chart = hoursArr.map((b,i)=> chart = {...b, ...swellArr[i], ...swellDirArr[i] }
         )
         
-        
-       
+        extractTable = (start,n)=> {
+            return chart.slice(start,n)
+        }
+
         
 
-        return chart;
+        //ORDENAR ESTA PEDAZO DE MIERDA
+        
+        var msw=[];
+
+        counter = 0;
+        msw = data.map((day,i)=>{
+            dayForecast = extractTable(counter,counter+8)
+            counter+=8;
+            return {day, dayForecast}
+        })
+
+
+        return msw;
     });
 
     browser.close();
