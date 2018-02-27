@@ -18,7 +18,9 @@ let scrape = async () => {
         let days = document.querySelectorAll('.msw-fc-day'); 
         let horas = document.querySelectorAll('.msw-fc-thour');
         let swells = document.querySelectorAll('.msw-fc-s');
-        let swellDirections = document.querySelectorAll('.msw-fc-lps')
+        let swellDirections = document.querySelectorAll('.msw-fc-lps');
+        let winds = document.querySelectorAll('.msw-fc-wg');
+        let windDirections = document.querySelectorAll('.msw-fc-wa')
         
         
 
@@ -27,6 +29,8 @@ let scrape = async () => {
         let swellArr = [];
         let swellDirArr = [];
         let daysArr = [];
+        let windsArr = [];
+        let windDirArr= [];
 
         
         //DAYS
@@ -58,10 +62,28 @@ let scrape = async () => {
             let direction = swellDirection.getAttribute('data-original-title');
             swellDirArr.push({direction});
         }
+
+        //WIND
+        for (var wind of winds){ 
+        
+            var viento = wind.innerText;
+            console.log(viento)
+
+            windsArr.push({viento}); 
+        }
+        
+        //WIND DIR
+        for (var windDirection of windDirections){ 
+        
+            var direccionViento = windDirection.getAttribute('data-original-title');
+            
+
+            windDirArr.push({direccionViento}); 
+        }
         
 
         //////////////////////////////////////////////////////////
-        var chart = hoursArr.map((b,i)=> chart = {...b, ...swellArr[i], ...swellDirArr[i] }
+        var chart = hoursArr.map((b,i)=> chart = {...b, ...swellArr[i], ...swellDirArr[i] , ...windsArr[i], ...windDirArr[i]}
         )
         
         extractTable = (start,n)=> {
