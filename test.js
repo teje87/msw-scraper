@@ -67,7 +67,8 @@ let scrape = async () => {
         for (var wind of winds){ 
         
             var viento = wind.innerText;
-            console.log(viento)
+            
+            viento = viento.replace(/\n|\r/g, "");
 
             windsArr.push({viento}); 
         }
@@ -76,7 +77,7 @@ let scrape = async () => {
         for (var windDirection of windDirections){ 
         
             var direccionViento = windDirection.getAttribute('data-original-title');
-            
+        
 
             windDirArr.push({direccionViento}); 
         }
