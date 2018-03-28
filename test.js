@@ -1,5 +1,7 @@
 const puppeteer = require('puppeteer');
+const axios = require('axios');
 const rootPage = "https://es.magicseaweed.com/Zurriola-Surf-Report/171/";
+const json = require('format-json');
 
 
 // (TODO) Make an array of webpages of different spots 
@@ -111,10 +113,57 @@ let scrape = async () => {
     });
 
     browser.close();
-    return result; 
+    let getSwell = result[0];
+
+    return getSwell;  
 };
+
+
+
+
 
 //SCRAPE FORECAST
 scrape().then((value) => {
-    console.log(value[0]); 
+
+    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text=Este es el parte de olas de hoy:');
+
+    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[0])
+        .replace(/,/g,  '\n' )
+        .replace(/['"]+/g, '')
+        .replace('{', '')
+        .replace('}', '')
+        
+    ));
+
+    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[1])
+        .replace(/,/g,  '\n' )
+        .replace(/['"]+/g, '')
+        .replace('{', '')
+        .replace('}', '')
+        
+    ));
+
+    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[2])
+        .replace(/,/g,  '\n' )
+        .replace(/['"]+/g, '')
+        .replace('{', '')
+        .replace('}', '')
+        
+    ));
+
+    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[3])
+        .replace(/,/g,  '\n' )
+        .replace(/['"]+/g, '')
+        .replace('{', '')
+        .replace('}', '')
+        
+    ));
+
+    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[4])
+        .replace(/,/g,  '\n' )
+        .replace(/['"]+/g, '')
+        .replace('{', '')
+        .replace('}', '')
+        
+    ));
 });
