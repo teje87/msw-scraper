@@ -127,43 +127,13 @@ scrape().then((value) => {
 
     axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text=Este es el parte de olas de hoy:');
 
-    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[0])
+    value.dayForecast.forEach((hour)=>{
+        axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(hour)
         .replace(/,/g,  '\n' )
         .replace(/['"]+/g, '')
         .replace('{', '')
         .replace('}', '')
-        
-    ));
+        ))
 
-    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[1])
-        .replace(/,/g,  '\n' )
-        .replace(/['"]+/g, '')
-        .replace('{', '')
-        .replace('}', '')
-        
-    ));
-
-    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[2])
-        .replace(/,/g,  '\n' )
-        .replace(/['"]+/g, '')
-        .replace('{', '')
-        .replace('}', '')
-        
-    ));
-
-    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[3])
-        .replace(/,/g,  '\n' )
-        .replace(/['"]+/g, '')
-        .replace('{', '')
-        .replace('}', '')
-        
-    ));
-
-    axios.post('https://api.telegram.org/bot586158692:AAEL92pNxZAwXJE_Kp-16O9S2wXU9vXSRIs/sendMessage?chat_id=125672177&text='+ encodeURIComponent(JSON.stringify(value.dayForecast[4])
-        .replace(/,/g,  '\n' )
-        .replace(/['"]+/g, '')
-        .replace('{', '')
-        .replace('}', '')
-        
-    ));
+    })
 });
